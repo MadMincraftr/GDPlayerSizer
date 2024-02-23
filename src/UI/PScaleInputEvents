@@ -33,7 +33,7 @@ namespace ScalerUI
             }
             else
             {
-                return 1 / (size + 1.75);
+                return 1 / size;
             }
         }
     };
