@@ -1,17 +1,40 @@
 #include <Geode/binding/TextInputDelegate.hpp>
 #include <Geode/binding/GameManager.hpp>
 #include <Geode/binding/PlayLayer.hpp>
+#include <regex>
+#include <iostream>  
+using namespace std;
 using namespace geode;
 using namespace geode::prelude;
 namespace ScalerUI
 {
-    class PScaleInputEventManager : TextInputDelegate 
+    class PScaleInputEventManager : public TextInputDelegate 
     {
-        void textChanged(CCTextInputNode p0)
+
+        public: void textChanged(CCTextInputNode* p0) override
         {
-            log::debug("Set scale!");
-            GameManager::get()->getPlayLayer()->m_player1->setScale(std::stof(p0.getString()));
-            GameManager::get()->getPlayLayer()->m_player2->setScale(std::stof(p0.getString()));
+            try
+            {
+                float calculatedGrav = calcGravMod(std::stof(p0->getString()));
+                GameManager::get()->getPlayLayer()->m_player1->m_vehicleSize = std::stof(p0->getString());
+                GameManager::get()->getPlayLayer()->m_player2->m_vehicleSize = std::stof(p0->getString());
+                GameManager::get()->getPlayLayer()->m_player1->updatePlayerScale();
+                GameManager::get()->getPlayLayer()->m_player2->updatePlayerScale();
+                GameManager::get()->getPlayLayer()->m_player1->m_gravityMod = calculatedGrav;
+                GameManager::get()->getPlayLayer()->m_player2->m_gravityMod = calculatedGrav;
+            }
+            catch(const std::invalid_argument&){}
         };
+        protected: float calcGravMod(float size)
+        {
+            if (size == 1)
+            {
+                return 1;
+            }
+            else
+            {
+                return 1 / (size + 1.75);
+            }
+        }
     };
 };
