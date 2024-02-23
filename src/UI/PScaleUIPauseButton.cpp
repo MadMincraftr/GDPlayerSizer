@@ -1,12 +1,15 @@
 #include <Geode\modify\PauseLayer.hpp>
 
+#include "PScaleUIPopup.cpp"
 using namespace geode::prelude;
-
 namespace ScalerUI
 {
 	class PScaleUIPauseButton : CCLayer
 	{
-		public: void onButton(CCObject* sender) {};
+		public: void onButton(CCObject* sender)
+		{
+			UIPopup::create()->show();
+		};
 
 		public: static CCMenuItemSpriteExtra* ElementCreate(CCObject* menu)
 		{

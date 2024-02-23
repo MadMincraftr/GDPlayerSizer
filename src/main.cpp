@@ -1,4 +1,5 @@
 #include <Geode\modify\PauseLayer.hpp>
+#include <Geode\modify\PlayLayer.hpp>
 #include "UI\PScaleUIPauseButton.cpp"
 
 using namespace geode::prelude;

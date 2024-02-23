@@ -1,0 +1,17 @@
+#include <Geode/binding/TextInputDelegate.hpp>
+#include <Geode/binding/GameManager.hpp>
+#include <Geode/binding/PlayLayer.hpp>
+using namespace geode;
+using namespace geode::prelude;
+namespace ScalerUI
+{
+    class PScaleInputEventManager : TextInputDelegate 
+    {
+        void textChanged(CCTextInputNode p0)
+        {
+            log::debug("Set scale!");
+            GameManager::get()->getPlayLayer()->m_player1->setScale(std::stof(p0.getString()));
+            GameManager::get()->getPlayLayer()->m_player2->setScale(std::stof(p0.getString()));
+        };
+    };
+};
