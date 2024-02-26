@@ -54,3 +54,5 @@ build-*/
 # clangd
 .cache/
 .vs/
+.vs/slnx.sqlite
+.vs/GDPlayerSizer/FileContentIndex/f0faf7d0-1eb0-4806-8c58-df371c1c945b.vsidx
